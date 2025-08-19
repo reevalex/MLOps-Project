@@ -3,7 +3,7 @@ import pandas as pd
 from src.common.config import Config
 
 
-def _basic_checks(df: pd.DateFrame, target: str):
+def _basic_checks(df: pd.DataFrame, target: str):
     assert target in df.columns, f"Missing target column: {target}"
     assert df[target].notna().all(), "Target column contains NaNs"
 
