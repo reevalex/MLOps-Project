@@ -43,7 +43,7 @@ def run(cfg: Config):
         pipe.fit(X, y)
 
         try:
-            p = pipe.predict_proba(X)[:, -1]
+            p = pipe.predict_proba(X)[:, 1]
             mlflow.log_metric("train_auc", float(roc_auc_score(y, p)))
         except Exception:
             pass
