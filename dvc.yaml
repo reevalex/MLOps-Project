@@ -1,0 +1,47 @@
+stages:
+  split:
+    cmd: python -m src.data.split_dataset --config params.yaml
+    deps:
+      - src/data/split_dataset.py
+      - params.yaml
+      - ${data.raw_path}
+    outs:
+      - ${data.train_path}
+      - ${data.test_path}
+    params:
+      - data.test_size
+      - data.random_state
+      - data.target_col
+  
+  validate:
+    cmd: python -m src.data.validate_data --config params.yaml
+    deps:
+      - src/data/validate_data.py
+      - params.yaml
+      - ${data.train_path}
+      - ${data.test_path}
+    
+  train:
+    cmd: python -m src.models.train --config params.yaml
+    deps:
+      - src/models/train.py
+      - src/features/build_features.py
+      - params.yaml
+      - ${data.train_path}
+    outs:
+      - ${serving.model_path}
+      - ${serving.feature_schema_path}
+    params:
+      - model.C
+      - model.max_iter
+      - data.target_col
+  
+  evaluate:
+    cmd: python -m src.models.evaluate --config params.yaml
+    deps:
+      - src/models/evaluate.py
+      - params.yaml
+      - ${data.test_path}
+      - ${serving.model_path}
+    outs:
+      - artifacts/metrics.json
