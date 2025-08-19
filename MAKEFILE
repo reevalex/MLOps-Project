@@ -1,0 +1,31 @@
+.PHONY: pipeline split validate train evaluate serve monitor test lint fmt
+
+pipeline: split validate train evaluate
+
+split:
+	python -m src.data.split_dataset --config params.yaml
+
+validate:
+	python -m src.data.validate_data --config params.yaml
+
+train:
+	python -m src.models.train --config params.yaml
+
+evaluate:
+	python -m src.models.evaluate --config params.yaml
+
+serve:
+	uvicorn src.serving.app:app --reload --host 0.0.0.0 --port 8000
+
+monitor:
+	python -m src.monitoring.monitor --config params.yaml
+
+lint:
+	flake8 src
+
+fmt:
+	black src && isort src
+
+test:
+	pytest -q
+
