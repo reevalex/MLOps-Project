@@ -1,0 +1,21 @@
+data:
+  raw_path: data/raw/churn.csv
+  train_path: data/processed/train.csv
+  test_path: data/processed/test.csv
+  id_col: customer_id
+  target_col: churn
+  test_size: 0.2
+  random_state: 42
+
+model:
+  type: logistic_regression
+  C: 1.0
+  max_iter: 1000
+
+tracking:
+  mlflow_tracking_uri: mlruns
+  experiment: churn-e2e
+
+serving:
+model_path: artifacts/model.joblib
+feature_schema_path: artifacts/feature_schema.json
