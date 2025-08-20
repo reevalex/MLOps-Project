@@ -21,10 +21,11 @@ monitor:
 	python -m src.monitoring.monitor --config params.yaml
 
 lint:
-	flake8 src
+	ruff check src
 
 fmt:
-	black src && isort src
+	ruff format src
+	ruff check src --fix
 
 test:
 	pytest -q
