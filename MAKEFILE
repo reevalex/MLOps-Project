@@ -20,6 +20,9 @@ serve:
 monitor:
 	uv run python -m src.monitoring.monitor --config params.yaml
 
+mlflow:
+	mlflow ui --backend-store-uri mlruns --port 5000
+	
 lint:
 	ruff check src
 
@@ -28,7 +31,4 @@ fmt:
 	ruff check src --fix
 
 test:
-	pytest -q
-
-mlflow:
-	mlflow ui --backend-store-uri mlruns --port 5000
+	PYTHONPATH=. uv run pytest -q

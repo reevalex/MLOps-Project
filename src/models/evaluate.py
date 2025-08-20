@@ -17,7 +17,7 @@ def run(cfg: Config):
 
     auc = float(roc_auc_score(y, proba))
     report = classification_report(y, preds, output_dict=True)
-    metrics = {"auc", auc, "report", report}
+    metrics = {"auc": auc, "report": report}
 
     with open("artifacts/metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)
