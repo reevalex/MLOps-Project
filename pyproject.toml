@@ -26,6 +26,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ipykernel>=6.30.1",
+    "mlops-project",
     "pytest>=8.4.1",
     "ruff>=0.12.9",
 ]
@@ -38,3 +39,11 @@ minversion = "6.0"
 addopts = "-ra -q --strict-markers --strict-config"
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.uv.workspace]
+members = [
+    ".",
+]
+
+[tool.uv.sources]
+mlops-project = { workspace = true }

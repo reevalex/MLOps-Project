@@ -51,8 +51,8 @@ def predict(payload: Records):
 
     X = pd.DataFrame(payload.records)
     try:
-        proba = model.predict_proba(X)[:, 1].tolist()
+        proba = model.predict_proba(X)[:, 1]
         preds = (proba >= 0.5).astype(int).tolist()
-        return {"predictions": preds, "probabilities": proba}
+        return {"predictions": preds, "probabilities": proba.astype(float).tolist()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=(str(e)))
