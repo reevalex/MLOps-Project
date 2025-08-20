@@ -21,9 +21,8 @@ def build_preprocessor(num_cols, cat_cols):
     )
     categorical = Pipeline(
         steps=[
-            ("imputer"),
-            SimpleImputer(strategy="most_frequent"),
-            ("ohe", OneHotEncoder(handle_unknown="ignore")),
+            ("imputer", SimpleImputer(strategy="most_frequent")),
+            ("ohe", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
         ]
     )
     pre = ColumnTransformer(

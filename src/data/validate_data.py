@@ -24,5 +24,5 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="params.yaml")
     args = ap.parse_args()
-    cfg = Config(args.config)
+    cfg = Config.from_yaml(args.config)
     run(cfg)

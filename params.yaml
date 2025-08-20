@@ -17,5 +17,5 @@ tracking:
   experiment: churn-e2e
 
 serving:
-model_path: artifacts/model.joblib
-feature_schema_path: artifacts/feature_schema.json
+  model_path: artifacts/model.joblib
+  feature_schema_path: artifacts/feature_schema.json

@@ -13,7 +13,7 @@ from src.features.build_features import infer_feature_types, build_preprocessor
 
 def build_pipeline(C: float, max_iter: int, num_cols, cat_cols) -> Pipeline:
     pre = build_preprocessor(num_cols, cat_cols)
-    clf = LogisticRegression(C, max_iter, n_jobs=None, solver="lbfgs")
+    clf = LogisticRegression(C=C, max_iter=max_iter, solver="lbfgs")
     pipe = Pipeline(steps=[("preprocess", pre), ("clf", clf)])
     return pipe
 
@@ -36,8 +36,8 @@ def run(cfg: Config):
                 "model": "logreg",
                 "C": cfg.C,
                 "max_iter": cfg.max_iter,
-                "num_cols": num_cols,
-                "cat_cols": cat_cols,
+                "num_cols": len(num_cols),
+                "cat_cols": len(cat_cols),
             }
         )
         pipe.fit(X, y)
@@ -62,5 +62,5 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="params.yaml")
     args = ap.parse_args()
-    cfg = Config(args.config)
+    cfg = Config.from_yaml(args.config)
     run(cfg)
