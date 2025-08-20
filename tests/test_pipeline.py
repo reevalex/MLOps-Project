@@ -1,5 +1,5 @@
 import pandas as pd
-from src.features.build_features import infer_feature_types, build_preprocessor
+from src.features.build_features import infer_feature_types
 from src.models.train import build_pipeline
 
 

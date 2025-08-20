@@ -19,5 +19,5 @@ jobs:
                 pip install -r requirements.txt -r requirements-dev.txt
             - name: Lint & Test
               run: |
-                flake8 src
+                ruff check src
                 pytest -q
