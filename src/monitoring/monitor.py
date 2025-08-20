@@ -8,7 +8,7 @@ from src.common.config import Config
 
 def run(cfg: Config):
     ref = pd.read_csv(cfg.test_path)
-    cur_path = "data/production.current.csv"
+    cur_path = "data/production/current.csv"
     if not os.path.exists(cur_path):
         raise FileNotFoundError("Put a CSV at data/production.current.csv for monitoring")
     cur = pd.read_csv(cur_path)
